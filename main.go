@@ -57,6 +57,29 @@ func main() {
 		screen.SetContent(32,0,'m',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
 
 		screen.Show()
-	
+		// getting the event
+		ev := screen.PollEvent()
+		// getting the event type
+		switch ev := ev.(type) {
+		case *tcell.EventKey:
+			// getting the event key
+			switch ev.Key() {
+				case tcell.KeyEscape:
+					running = false
+				case tcell.KeyCtrlC:
+					running = false
+				case tcell.KeyCtrlQ:
+					running = false
+				case tcell.KeyCtrlX:
+					running = false
+				case tcell.KeyCtrlD:
+					running = false
+				default:
+					switch ev.Rune() {
+					case 'q':
+						running = false
+					}
+				}
+	}
 }
 }
