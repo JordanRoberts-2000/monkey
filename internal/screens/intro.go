@@ -10,7 +10,7 @@ import (
 )
 
 func IntroScreen(screen tcell.Screen) {
-	width, _ := screen.Size()
+	width, height := screen.Size()
 	var multiplier float64
 	if width > 60 {
 		multiplier = 0.8
@@ -51,36 +51,40 @@ func IntroScreen(screen tcell.Screen) {
 		y++
 	}
 
-	y++
+	renderedHeight := len(bulletTwoLines) + len(bulletOneLines) + len(introductionLines) + 7 // header + footer + gap
 
-	for i, line := range bulletOneLines {
-		if i == 0 {
-			screen.SetContent(0, y, '○', nil, styles.Highlighted)
-			for x, ch := range line {
-				screen.SetContent(x+2, y, ch, nil, styles.Muted)
-			}
-		} else {
-			for x, ch := range line {
-				screen.SetContent(x+2, y, ch, nil, styles.Muted)
-			}
-		}
+	if height >= renderedHeight {
 		y++
-	}
 
-	y++
-
-	for i, line := range bulletTwoLines {
-		if i == 0 {
-			screen.SetContent(0, y, '○', nil, styles.Highlighted)
-			for x, ch := range line {
-				screen.SetContent(x+2, y, ch, nil, styles.Muted)
+		for i, line := range bulletOneLines {
+			if i == 0 {
+				screen.SetContent(0, y, '○', nil, styles.Highlighted)
+				for x, ch := range line {
+					screen.SetContent(x+2, y, ch, nil, styles.Muted)
+				}
+			} else {
+				for x, ch := range line {
+					screen.SetContent(x+2, y, ch, nil, styles.Muted)
+				}
 			}
-		} else {
-			for x, ch := range line {
-				screen.SetContent(x+2, y, ch, nil, styles.Muted)
-			}
+			y++
 		}
+
 		y++
+
+		for i, line := range bulletTwoLines {
+			if i == 0 {
+				screen.SetContent(0, y, '○', nil, styles.Highlighted)
+				for x, ch := range line {
+					screen.SetContent(x+2, y, ch, nil, styles.Muted)
+				}
+			} else {
+				for x, ch := range line {
+					screen.SetContent(x+2, y, ch, nil, styles.Muted)
+				}
+			}
+			y++
+		}
 	}
 
 	y++
