@@ -4,7 +4,10 @@ import (
 	"errors"
 	"log"
 	"main/screens"
+	"main/utils"
 	"os"
+	"os/signal"
+	"syscall"
 	"unicode"
 
 	"golang.org/x/term"
@@ -25,6 +28,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to get terminal size: %v", err)
 	}
+
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, os.Interrupt, syscall.SIGINT)
+
+	go func() {
+		<-sigChan
+		utils.ClearScreen()
+		os.Exit(0)
+	}()
 
 	screens.IntroScreen(height, width)
 	screens.SelectKeys()

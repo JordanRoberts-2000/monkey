@@ -68,7 +68,7 @@ func IntroScreen(height int, width int) {
 		}
 
 		fmt.Println()
-		fmt.Print("Press enter to continue")
+		fmt.Print("Press enter to continue ")
 		reader := bufio.NewReader(os.Stdin)
 		_, _ = reader.ReadByte()
 	}
