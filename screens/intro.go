@@ -17,7 +17,13 @@ func IntroScreen(height int, width int) {
 		utils.ClearScreen()
 	  utils.PrintHeader("Infinite Monkey Theorem")
 
-		scaledWidth := int(float64(width) * 0.8)
+		var multiplier float64
+		if width > 60 {
+			multiplier = 0.8
+		} else {
+			multiplier = 0.9
+		}
+		scaledWidth := int(float64(width) * multiplier)
 
 		introduction := `If an immortal monkey were to hit keys on a typewriter at random for an infinite amount of time, it would type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story.`
 		wrappedIntroduction := wordwrap.WrapString(introduction, uint(scaledWidth))
