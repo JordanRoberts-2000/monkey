@@ -1,10 +1,13 @@
 package styles
 
-import "github.com/fatih/color"
+import "github.com/gdamore/tcell/v2"
 
 var (
-	Display  = color.New(color.FgBlack, color.BgHiGreen, color.Bold)
-	BoldText = color.New(color.Bold)    
-	Highlighted = color.New(color.FgHiGreen)                          
-	Muted = color.RGB(163, 163, 163)            
+	Default = tcell.StyleDefault.Foreground(tcell.ColorWhite)
+	Display = tcell.StyleDefault.
+		Foreground(tcell.ColorBlack).
+		Background(tcell.ColorLightGreen).
+		Bold(true)
+	Highlighted = tcell.StyleDefault.Foreground(tcell.ColorLightGreen)
+	Muted = tcell.StyleDefault.Foreground(tcell.NewRGBColor(163, 163, 163))
 )

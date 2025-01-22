@@ -2,12 +2,10 @@ package main
 
 import (
 	"log"
-	"main/styles"
+	"main/screens"
 	"main/utils"
-	"strings"
 
 	"github.com/gdamore/tcell/v2"
-	"github.com/mitchellh/go-wordwrap"
 )
 
 
@@ -27,31 +25,9 @@ func main() {
 	for running {
 		screen.Clear()
 
-		utils.DrawText(screen, 0, 0, " Monkey ", styles.Display)
-		
-		utils.DrawText(screen, 10, 0, "Infinite Monkey Theorem", styles.Default.Bold(true))
+		utils.DrawHeader(screen, "Infinite Monkey Theorem")
 
-		width, _ := screen.Size()
-		var multiplier float64
-		if width > 60 {
-			multiplier = 0.8
-		} else {
-			multiplier = 0.98
-		}
-		scaledWidth := int(float64(width) * multiplier)
-
-		introduction := `If an immortal monkey were to hit keys on a typewriter at random for an infinite amount of time, it would type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story.`
-		wrappedIntroduction := wordwrap.WrapString(introduction, uint(scaledWidth))
-
-		lines := strings.Split(wrappedIntroduction, "\n")
-
-		y := 2 
-		for _, line := range lines {
-			for x, ch := range line {
-				screen.SetContent(x, y, ch, nil, tcell.StyleDefault)
-			}
-			y++ // Move to the next line
-		}
+		screens.IntroScreen(screen)
 
 		screen.Show()
 		// getting the event
