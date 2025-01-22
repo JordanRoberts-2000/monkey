@@ -4,34 +4,71 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
-	"github.com/fatih/color"
-	"github.com/inancgumus/screen"
+	"main/styles"
+	"main/utils"
+
 	"github.com/mitchellh/go-wordwrap"
 )
 
 func IntroScreen(height int, width int) {
 	if height >= 9 {
-		screen.Clear()
-		screen.MoveTopLeft()
-	
-		display := color.New(color.FgWhite, color.BgBlack, color.Bold)
-		boldText := color.New(color.Bold)
-		display.Print(" Monkey ")
+		utils.ClearScreen()
+	  utils.PrintHeader("Infinite Monkey Theorem")
 
-		text := `"If an immortal monkey were to hit keys on a typewriter at random for an infinite amount of time, it would almost surely type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story."`
-		scaledWidth := int(float64(width) * 0.7)
-		wrapped := wordwrap.WrapString(text, uint(scaledWidth))
+		scaledWidth := int(float64(width) * 0.8)
+
+		introduction := `If an immortal monkey were to hit keys on a typewriter at random for an infinite amount of time, it would type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story.`
+		wrappedIntroduction := wordwrap.WrapString(introduction, uint(scaledWidth))
 		
-		boldText.Println("  \"Infinite monkey theorem\"")
+
+		bulletPointOne := "Given infinite time, any sequence of events with a non-zero probability will occur."
+		wrappedBulletPointOne := wordwrap.WrapString(bulletPointOne, uint(scaledWidth))
+
+		bulletPointTwo := "While the probability of typing any specific text (like a novel) is astronomically small, over infinite time, the sheer number of attempts ensures that it will eventually happen."
+		wrappedBulletPointTwo := wordwrap.WrapString(bulletPointTwo, uint(scaledWidth))
+		
+		
+		lines := strings.Split(wrappedIntroduction, "\n")
+		for i, line := range lines {
+			if i == 0 {
+				styles.Highlighted.Print("\"")
+				styles.Muted.Println(" " + line)
+			} else if i == len(lines) - 1 {
+				styles.Muted.Print("  " + line + " ")
+				styles.Highlighted.Println("\"")
+			}else {
+				styles.Muted.Println("  " + line)
+			}
+		}
+
 		fmt.Println()
-		fmt.Println(wrapped)
+		
+		lines2 := strings.Split(wrappedBulletPointOne, "\n")
+		for i, line := range lines2 {
+			if i == 0 {
+				styles.Highlighted.Print("○")
+				styles.Muted.Println(" " + line)
+			} else {
+				styles.Muted.Println("  " + line)
+			}
+		}
+
 		fmt.Println()
-		fmt.Println("∘ Given infinite time, any sequence of events with a non-zero probability will occur.")
+		
+		lines3 := strings.Split(wrappedBulletPointTwo, "\n")
+		for i, line := range lines3 {
+			if i == 0 {
+				styles.Highlighted.Print("○")
+				styles.Muted.Println(" " + line)
+			} else {
+				styles.Muted.Println("  " + line)
+			}
+		}
+
 		fmt.Println()
-		fmt.Println("∘ While the probability of typing any specific text (like a novel) is astronomically small, over \n  infinite time, the sheer number of attempts ensures that it will eventually happen.")
-		fmt.Println()
-		fmt.Print("Press enter to continue...")
+		fmt.Print("Press enter to continue")
 		reader := bufio.NewReader(os.Stdin)
 		_, _ = reader.ReadByte()
 	}
