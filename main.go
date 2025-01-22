@@ -2,36 +2,33 @@ package main
 
 import (
 	"log"
+	"main/app"
+	"main/components"
 	"main/screens"
-	"main/utils"
 
 	"github.com/gdamore/tcell/v2"
 )
 
 
 func main() {
-	// Initialize tcell screen
-	screen, err := tcell.NewScreen()
+	app, err := app.Initialize()
 	if err != nil {
-		log.Fatalf("Failed to create tcell screen: %v", err)
+		log.Fatalf("Failed to initialise app: %v", err)
 	}
-	if err := screen.Init(); err != nil {
-		log.Fatalf("Failed to initialize tcell screen: %v", err)
-	}
-	defer screen.Fini() 
+	defer app.Screen.Fini() 
 
 	// loop
 	running := true
 	for running {
-		screen.Clear()
+		app.Screen.Clear()
 
-		utils.DrawHeader(screen, "Infinite Monkey Theorem")
+		components.DrawHeader(app.Screen, "Infinite Monkey Theorem")
+		screens.IntroScreen(app.Screen)
+		// next screen after pressing any key
 
-		screens.IntroScreen(screen)
-
-		screen.Show()
+		app.Screen.Show()
 		// getting the event
-		ev := screen.PollEvent()
+		ev := app.Screen.PollEvent()
 		// getting the event type
 		switch ev := ev.(type) {
 		case *tcell.EventKey:
