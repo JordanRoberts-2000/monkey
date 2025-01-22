@@ -1,57 +1,62 @@
 package main
 
 import (
-	"errors"
 	"log"
-	"main/screens"
-	"main/utils"
-	"os"
-	"os/signal"
-	"syscall"
-	"unicode"
 
-	"golang.org/x/term"
+	"github.com/gdamore/tcell/v2"
 )
-
-func validateInput(input string) error {
-	for _, char := range input {
-		if !unicode.IsLetter(char) || unicode.IsUpper(char) {
-			return errors.New("string is invalid")
-		}
-	}
-	return nil
-}
 
 
 func main() {
-	width, height, err := term.GetSize(int(os.Stdout.Fd()))
+	// Initialize tcell screen
+	screen, err := tcell.NewScreen()
 	if err != nil {
-		log.Fatalf("Failed to get terminal size: %v", err)
+		log.Fatalf("Failed to create tcell screen: %v", err)
 	}
+	if err := screen.Init(); err != nil {
+		log.Fatalf("Failed to initialize tcell screen: %v", err)
+	}
+	defer screen.Fini() 
 
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan, os.Interrupt, syscall.SIGINT)
+	// loop
+	running := true
+	for running {
+		screen.Clear()
 
-	go func() {
-		<-sigChan
-		utils.ClearScreen()
-		os.Exit(0)
-	}()
+		screen.SetContent(0,0,' ',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhiteSmoke.TrueColor()))
+		screen.SetContent(1,0,'M',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(50, 205, 50)).Foreground(tcell.ColorWhiteSmoke.TrueColor()))
+		screen.SetContent(2,0,'o',nil, tcell.StyleDefault.Background(tcell.ColorBlack).Foreground(tcell.ColorWhite))
+		screen.SetContent(3,0,'n',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhiteSmoke.TrueColor()))
+		screen.SetContent(4,0,'k',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhite))
+		screen.SetContent(5,0,'e',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhite))
+		screen.SetContent(6,0,'y',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhite))
+		screen.SetContent(7,0,' ',nil, tcell.StyleDefault.Background(tcell.NewRGBColor(22, 163, 74)).Foreground(tcell.ColorWhite))
 
-	screens.IntroScreen(height, width)
-	screens.SelectKeys()
-	screens.MonkeyTyping()
-	// 	err := validateInput(input)
-	// 	if err != nil {
-	// 		fmt.Println("Error:", err)
-	// 		fmt.Println("Please try again.")
-	// 	} else {
-	// 		break
-	// 	}
-	// }
+		screen.SetContent(10,0,'I',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(11,0,'n',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(12,0,'f',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(13,0,'i',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(14,0,'n',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(15,0,'i',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(16,0,'t',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(17,0,'e',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(18,0,' ',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(19,0,'M',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(20,0,'o',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(21,0,'n',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(22,0,'k',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(23,0,'e',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(24,0,'y',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(25,0,' ',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(26,0,'T',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(27,0,'h',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(28,0,'e',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(29,0,'o',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(30,0,'r',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(31,0,'e',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
+		screen.SetContent(32,0,'m',nil, tcell.StyleDefault.Attributes(tcell.AttrBold))
 
-	// seed := int64(42) // Your desired seed value
-  // rng := rand.New(rand.NewSource(seed))
-	// randomLetter := rune(rng.Intn(26) + 'a')
-	// fmt.Printf("Random lowercase letter: %c\n", randomLetter)
+		screen.Show()
+	
+}
 }
