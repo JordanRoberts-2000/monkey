@@ -1,8 +1,8 @@
 package screens
 
 import (
-	"main/styles"
-	"main/utils"
+	"main/internal/styles"
+	"main/internal/utils"
 	"strings"
 
 	"github.com/gdamore/tcell/v2"
@@ -31,7 +31,7 @@ func IntroScreen(screen tcell.Screen) {
 	wrappedPointTwo := wordwrap.WrapString(bulletTwo, uint(scaledWidth))
 	bulletTwoLines := strings.Split(wrappedPointTwo, "\n")
 
-	y := 2 
+	y := 2
 	for i, line := range introductionLines {
 		if i == 0 {
 			screen.SetContent(0, y, '"', nil, styles.Highlighted)

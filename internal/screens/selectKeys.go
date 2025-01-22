@@ -1,6 +1,14 @@
 package screens
 
-func SelectKeys() {
+import (
+	"main/internal/styles"
+	"main/internal/utils"
+
+	"github.com/gdamore/tcell/v2"
+)
+
+func SelectKeys(screen tcell.Screen) {
+	utils.DrawText(screen, 5, 5, "test", styles.Default)
 	// utils.ClearScreen()
 	// utils.PrintHeader("How many keys to include?")
 

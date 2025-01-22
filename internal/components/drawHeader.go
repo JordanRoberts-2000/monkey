@@ -1,8 +1,8 @@
 package components
 
 import (
-	"main/styles"
-	"main/utils"
+	"main/internal/styles"
+	"main/internal/utils"
 
 	"github.com/gdamore/tcell/v2"
 )
