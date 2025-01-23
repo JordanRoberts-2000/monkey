@@ -8,10 +8,12 @@ import (
 
 func MonkeyTypingKeys(appState *state.AppState, ev *tcell.EventKey) {
 	switch ev.Key() {
-	case tcell.KeyRune:
-		if ev.Rune() == 'B' {
-			appState.CurrentScreen = state.EnterInput
+	case tcell.KeyLeft:
+		appState.CurrentScreen = state.EnterInput
+		if appState.UserInput != "" {
 			appState.UserInput = ""
+		}
+		if appState.InvalidMessage != "" {
 			appState.InvalidMessage = ""
 		}
 	}

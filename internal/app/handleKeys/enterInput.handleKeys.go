@@ -13,6 +13,10 @@ func EnterInputKeys(appState *state.AppState, ev *tcell.EventKey) {
 		if utils.ValidateInput(appState) {
 			appState.CurrentScreen = state.MonkeyTyping
 		}
+	case tcell.KeyRight:
+		if utils.ValidateInput(appState) {
+			appState.CurrentScreen = state.MonkeyTyping
+		}
 	case tcell.KeyBackspace, tcell.KeyBackspace2:
 		if len(appState.UserInput) > 0 {
 			appState.UserInput = appState.UserInput[:len(appState.UserInput)-1]
@@ -20,11 +24,16 @@ func EnterInputKeys(appState *state.AppState, ev *tcell.EventKey) {
 		if appState.InvalidMessage != "" {
 			appState.InvalidMessage = ""
 		}
-	case tcell.KeyRune:
-		if ev.Rune() == 'B' {
-			appState.CurrentScreen = state.SelectKeys
-		} else {
-			appState.UserInput += string(ev.Rune())
+	case tcell.KeyLeft:
+		appState.CurrentScreen = state.SelectKeys
+		if appState.UserInput != "" {
+			appState.UserInput = ""
 		}
+		if appState.InvalidMessage != "" {
+			appState.InvalidMessage = ""
+		}
+
+	case tcell.KeyRune:
+		appState.UserInput += string(ev.Rune())
 	}
 }
