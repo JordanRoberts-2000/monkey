@@ -23,8 +23,8 @@ func main() {
 			components.DrawHeader(app.Screen, "Infinite Monkey Theorem")
 			screens.IntroScreen(app.Screen)
 		case state.SelectKeys:
-			components.DrawHeader(app.Screen, "Select Allowed Keys:")
-			screens.SelectKeys(app.Screen)
+			components.DrawHeader(app.Screen, "Select Character Set:")
+			screens.SelectKeys(app.Screen, int(app.State.CharSetIndex))
 		}
 
 		app.Screen.Show()

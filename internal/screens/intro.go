@@ -19,7 +19,7 @@ func IntroScreen(screen tcell.Screen) {
 	}
 	scaledWidth := int(float64(width) * multiplier)
 
-	introduction := `If an immortal monkey were to hit keys on a typewriter at random for an infinite amount of time, it would type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story.`
+	introduction := `If an immortal monkey hit keys on a typewriter at random for an infinite amount of time, it would type every possible finite sequence of text, including the complete works of Shakespeare, every book ever written, and even your own life story.`
 	wrappedIntroduction := wordwrap.WrapString(introduction, uint(scaledWidth))
 	introductionLines := strings.Split(wrappedIntroduction, "\n")
 
