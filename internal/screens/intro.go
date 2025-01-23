@@ -91,5 +91,5 @@ func IntroScreen(screen tcell.Screen) {
 
 	utils.DrawText(screen, 0, y, "Press any key to continue...", styles.Default)
 	y++
-	utils.DrawText(screen, 0, y, "(q) quit", styles.Muted)
+	utils.DrawText(screen, 0, y, "(esc) quit", styles.Muted)
 }

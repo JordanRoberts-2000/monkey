@@ -17,7 +17,7 @@ func SelectKeys(screen tcell.Screen, optionIndex int) {
 
 	for i, option := range options {
 		if i == optionIndex {
-			utils.DrawText(screen, 1, 2+i, "●", styles.Highlighted)
+			utils.DrawText(screen, 1, 2+i, "◉", styles.Highlighted)
 			utils.DrawText(screen, 4, 2+i, option, styles.Default)
 		} else {
 			utils.DrawText(screen, 1, 2+i, "○"+option, styles.Muted)

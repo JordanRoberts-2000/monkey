@@ -6,6 +6,7 @@ type CharSetId int
 const (
 	Intro ScreenId = iota
 	SelectKeys
+	EnterInput
 	MonkeyTyping
 )
 

@@ -12,10 +12,4 @@ func GlobalKeys(state *state.AppState, ev *tcell.EventKey) {
 		state.Running = false
 		return
 	}
-
-	switch ev.Rune() {
-	case 'q':
-		state.Running = false
-		return
-	}
 }
