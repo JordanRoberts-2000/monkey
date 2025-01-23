@@ -22,6 +22,8 @@ func HandleKeys(screen tcell.Screen, appState *state.AppState) {
 	switch appState.CurrentScreen {
 	case state.Intro:
 		IntroScreenKeys(appState)
+	case state.EnterInput:
+		EnterInputKeys(appState, keyEvent)
 	case state.SelectKeys:
 		SelectScreenKeys(appState, keyEvent)
 	}

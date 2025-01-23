@@ -21,6 +21,7 @@ type AppState struct {
 	CurrentScreen ScreenId
 	Running       bool
 	CharSetIndex  CharSetId
+	UserInput     string
 }
 
 func Initialize() *AppState {
@@ -28,5 +29,6 @@ func Initialize() *AppState {
 		CurrentScreen: Intro,
 		Running:       true,
 		CharSetIndex:  0,
+		UserInput:     "",
 	}
 }
