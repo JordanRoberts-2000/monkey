@@ -26,6 +26,8 @@ func HandleKeys(screen tcell.Screen, appState *state.AppState) {
 		EnterInputKeys(appState, keyEvent)
 	case state.SelectKeys:
 		SelectScreenKeys(appState, keyEvent)
+	case state.MonkeyTyping:
+		MonkeyTypingKeys(appState, keyEvent)
 	}
 
 }
