@@ -27,7 +27,7 @@ func main() {
 			screens.SelectKeys(app.Screen, int(app.State.CharSetIndex))
 		case state.EnterInput:
 			components.DrawHeader(app.Screen, "Enter Some Target Text:", 3)
-			screens.EnterInput(app.Screen, app.State.UserInput, app.State.InvalidMessage)
+			screens.EnterInput(app.Screen, app.State.UserInput, app.State.InvalidMessage, int(app.State.CharSetIndex))
 		case state.MonkeyTyping:
 			components.DrawHeader(app.Screen, "Monkey Is Typing!", 4)
 			screens.MonkeyTyping(app.Screen, app.State.UserInput)
