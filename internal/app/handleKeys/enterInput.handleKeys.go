@@ -34,6 +34,8 @@ func EnterInputKeys(appState *state.AppState, ev *tcell.EventKey) {
 		}
 
 	case tcell.KeyRune:
-		appState.UserInput += string(ev.Rune())
+		if len(appState.UserInput) < 50 {
+			appState.UserInput += string(ev.Rune())
+		}
 	}
 }
