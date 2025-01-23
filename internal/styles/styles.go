@@ -9,5 +9,6 @@ var (
 		Background(tcell.ColorLightGreen).
 		Bold(true)
 	Highlighted = tcell.StyleDefault.Foreground(tcell.ColorLightGreen)
-	Muted = tcell.StyleDefault.Foreground(tcell.NewRGBColor(163, 163, 163))
+	Invalid     = tcell.StyleDefault.Foreground(tcell.ColorIndianRed)
+	Muted       = tcell.StyleDefault.Foreground(tcell.NewRGBColor(163, 163, 163))
 )

@@ -18,17 +18,19 @@ var CharSets = map[CharSetId]string{
 }
 
 type AppState struct {
-	CurrentScreen ScreenId
-	Running       bool
-	CharSetIndex  CharSetId
-	UserInput     string
+	CurrentScreen  ScreenId
+	Running        bool
+	CharSetIndex   CharSetId
+	UserInput      string
+	InvalidMessage string
 }
 
 func Initialize() *AppState {
 	return &AppState{
-		CurrentScreen: Intro,
-		Running:       true,
-		CharSetIndex:  0,
-		UserInput:     "",
+		CurrentScreen:  Intro,
+		Running:        true,
+		CharSetIndex:   0,
+		UserInput:      "",
+		InvalidMessage: "",
 	}
 }
